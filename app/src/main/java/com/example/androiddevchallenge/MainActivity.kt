@@ -18,6 +18,7 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -29,6 +30,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,15 +55,15 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val PUPPIES_LIST = listOf(
-            Puppy("Bella","Beagle", 7, "Brown"),
-            Puppy("Duke","Labrador", 3, "Black"),
-            Puppy("Snowy","German Shepherd", 12, "White"),
-            Puppy("Triggs","Dalmatian", 15, "Light Brown"),
-            Puppy("Ariel","Belgian Shepherd", 12, "Black"),
-            Puppy("Max","Yorkshire Terrier", 10, "Grey"),
-            Puppy("Eve","Corgi", 24, "Dark Brown"),
-            Puppy("Pumpkin","Lurcher", 12, "White/Brown"),
-            Puppy("Milo","Bull Mastiff", 3, "Brown")
+            Puppy("Bella", "Beagle", 7, "Brown/White", R.drawable.beagle),
+            Puppy("Duke","Labrador", 3, "Golden", R.drawable.lab),
+            Puppy("Snowy","German Shepherd", 12, "Black/Brown", R.drawable.german_shepherd),
+            Puppy("Triggs","Dalmatian", 15, "Black/White", R.drawable.dalmation),
+            Puppy("Ariel","Belgian Shepherd", 12, "Brown", R.drawable.belgian_shepherd),
+            Puppy("Max","Yorkshire Terrier", 10, "Brown/Black", R.drawable.yorkshire_terrier),
+            Puppy("Eve","Corgi", 24, "Light Brown", R.drawable.corgi),
+            Puppy("Pumpkin","Lurcher", 12, "Light Brown", R.drawable.lurcher),
+            Puppy("Milo","Bull Mastiff", 3, "Brown", R.drawable.bullmastiff)
         )
     }
 }
@@ -98,12 +101,19 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .clickable(onClick = onClick)
-            .padding(vertical = 8.dp)
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-//        Image(imageVector = , contentDescription = )
+            Image(
+                painterResource(puppy.photo),
+                contentDescription = "Image of a ${puppy.breed}",
+                modifier = Modifier
+                    .size(50.dp),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center
+            )
+            Spacer(Modifier.size(16.dp))
             Column {
                 Text(
                     text = puppy.name,
@@ -118,21 +128,31 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
 
 @Composable
 fun PuppyDetail(puppy: Puppy) {
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .fillMaxWidth()
-    ) {
-//        Image()
-        Text(
-            text = puppy.name,
-            fontWeight = FontWeight.Bold,
-            fontSize = 28.sp,
-            modifier = Modifier.padding(vertical = 16.dp)
+    Column {
+        Image(
+            painterResource(puppy.photo),
+            contentDescription = "Image of a ${puppy.breed}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp),
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center
         )
-        Text("Breed: ${puppy.breed}", fontSize = 20.sp)
-        Text("Age: ${puppy.ageInMonths} months", fontSize = 20.sp)
-        Text("Color: ${puppy.color}", fontSize = 20.sp)
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            Text(
+                text = puppy.name,
+                fontWeight = FontWeight.Bold,
+                fontSize = 28.sp,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+            Text("Breed: ${puppy.breed}", fontSize = 20.sp)
+            Text("Age: ${puppy.ageInMonths} months", fontSize = 20.sp)
+            Text("Color: ${puppy.color}", fontSize = 20.sp)
+        }
     }
 }
 
