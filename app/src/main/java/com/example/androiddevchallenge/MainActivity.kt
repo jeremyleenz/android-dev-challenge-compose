@@ -20,7 +20,13 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -56,14 +62,14 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private val PUPPIES_LIST = listOf(
             Puppy("Bella", "Beagle", 7, "Brown/White", R.drawable.beagle),
-            Puppy("Duke","Labrador", 3, "Golden", R.drawable.lab),
-            Puppy("Snowy","German Shepherd", 12, "Black/Brown", R.drawable.german_shepherd),
-            Puppy("Triggs","Dalmatian", 15, "Black/White", R.drawable.dalmation),
-            Puppy("Ariel","Belgian Shepherd", 12, "Brown", R.drawable.belgian_shepherd),
-            Puppy("Max","Yorkshire Terrier", 10, "Brown/Black", R.drawable.yorkshire_terrier),
-            Puppy("Eve","Corgi", 24, "Light Brown", R.drawable.corgi),
-            Puppy("Pumpkin","Lurcher", 12, "Light Brown", R.drawable.lurcher),
-            Puppy("Milo","Bull Mastiff", 3, "Brown", R.drawable.bullmastiff)
+            Puppy("Duke", "Labrador", 3, "Golden", R.drawable.lab),
+            Puppy("Snowy", "German Shepherd", 12, "Black/Brown", R.drawable.german_shepherd),
+            Puppy("Triggs", "Dalmatian", 15, "Black/White", R.drawable.dalmation),
+            Puppy("Ariel", "Belgian Shepherd", 12, "Brown", R.drawable.belgian_shepherd),
+            Puppy("Max", "Yorkshire Terrier", 10, "Brown/Black", R.drawable.yorkshire_terrier),
+            Puppy("Eve", "Corgi", 24, "Light Brown", R.drawable.corgi),
+            Puppy("Pumpkin", "Lurcher", 12, "Light Brown", R.drawable.lurcher),
+            Puppy("Milo", "Bull Mastiff", 3, "Brown", R.drawable.bullmastiff)
         )
     }
 }
