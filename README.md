@@ -1,27 +1,35 @@
-# Template repository
+# Puppies for Adoption
 
-Template repository for the Jetpack Compose [#AndroidDevChallenge](https://developer.android.com/dev-challenge).
+<!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
+<!--- You can find both of these in the url bar when you open your repository in github. -->
+![Workflow result](https://github.com/jeremyleenz/android-dev-challenge-compose/workflows/Check/badge.svg)
 
-## Getting started
-Copy this repository by pressing the "Use this template" button in Github.
-Clone your repository and open it in the latest [Android Studio (Canary build)](https://developer.android.com/studio/preview).
 
-## Submission requirements
-- Follow the challenge description on the project website: [developer.android.com/dev-challenge](https://developer.android.com/dev-challenge)
-- All UI should be written using Jetpack Compose
-- The Github Actions workflow should complete successfully
-- Include two screenshots of your submission in the [results](results) folder. The names should be
-  screenshot_1.png and screenshot_2.png.
-- Include a screen record of your submission in the [results](results) folder. The name should be
-  video.mp4
-- Replace the contents of [README.md](README.md) with the contents of [README-template.md](README-template.md) and fill out the template.
+## :scroll: Description
+<!--- Describe your app in one or two sentences -->
+This app displays a list of puppies that are available for adoption. The user is able to select a puppy to view a larger image and more information about it.
 
-## Code formatting
-The CI uses [Spotless](https://github.com/diffplug/spotless) to check if your code is formatted correctly and contains the right licenses.
-Internally, Spotless uses [ktlint](https://github.com/pinterest/ktlint) to check the formatting of your code.
-To set up ktlint correctly with Android Studio, follow one of the [listed setup options](https://github.com/pinterest/ktlint#-with-intellij-idea).
 
-Before committing your code, run `./gradlew app:spotlessApply` to automatically format your code.
+## :bulb: Motivation and Context
+<!--- Optionally point readers to interesting parts of your submission. -->
+<!--- What are you especially proud of? -->
+Built mainly for the purposes of learning concepts of Jetpack Compose. The use of Navigation component in conjunction with Compose was quite straightforward.
+
+
+## :camera_flash: Screenshots
+<!-- You can add more screenshots here if you like -->
+<img src="/results/screenshot_1.png" width="260">&emsp;<img src="/results/screenshot_2.png" width="260">
+
+Images in app used under Creative Commons license:
+- https://commons.wikimedia.org/wiki/File:Bullmastiff_Puppy.jpg
+- https://www.flickr.com/photos/simon_ingram/14185308496/
+- https://picryl.com/media/pembroke-welsh-corgi-13c25e
+- https://en.wikipedia.org/wiki/File:Seven-week-old_Yorkshire_Terrier.jpg
+- https://www.flickr.com/photos/25667114@N06/2569438921
+- https://www.flickr.com/photos/pulkitsinha/4759832869
+- https://pixabay.com/de/photos/labrador-retriever-hund-haustier-4446566/
+- https://pixabay.com/de/photos/beagle-hund-haustier-niedlich-3877115/
+- https://commons.wikimedia.org/wiki/File:Belgian_Shepherd_Malinois_grass_portrait.jpg
 
 ## License
 ```
