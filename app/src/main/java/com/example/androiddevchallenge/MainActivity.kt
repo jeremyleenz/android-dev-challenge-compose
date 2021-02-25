@@ -18,20 +18,19 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,17 +43,37 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                MyApp(puppies = PUPPIES_LIST)
             }
         }
+    }
+
+    companion object {
+        private val PUPPIES_LIST = listOf(
+            Puppy("Bella","Beagle", 7),
+            Puppy("Duke","Staffordshire Bull Terrier", 3),
+            Puppy("Snowy","German Shepherd", 12),
+            Puppy("Triggs","Staffordshire Bull Terrier", 15),
+            Puppy("Ariel","Belgian Shepherd", 12),
+            Puppy("Max","Yorkshire Terrier", 10),
+            Puppy("Eve","Saluki", 24),
+            Puppy("Pumpkin","Lurcher", 12),
+            Puppy("Milo","Bull Mastiff", 3)
+        )
     }
 }
 
 // Start building your app here!
 @Composable
-fun MyApp() {
+fun MyApp(puppies: List<Puppy>) {
     Surface(color = MaterialTheme.colors.background) {
-        
+        LazyColumn {
+            items(puppies) { puppy ->
+                PuppyCard(puppy) {
+                    // on click
+                }
+            }
+        }
     }
 }
 
@@ -65,19 +84,18 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
             .clickable(onClick = onClick)
             .padding(vertical = 8.dp)
             .fillMaxWidth()
-            .background(Color.LightGray, RectangleShape)
             .padding(16.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
 //        Image(imageVector = , contentDescription = )
             Column {
                 Text(
-                    text = puppy.breed,
+                    text = puppy.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
+                Text("Breed: ${puppy.breed}")
                 Text("Age: ${puppy.ageInMonths} months")
-                Text("Weight: ${puppy.weightInKgs} kg")
             }
         }
     }
@@ -87,7 +105,7 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        MyApp(emptyList())
     }
 }
 
@@ -95,6 +113,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        MyApp(emptyList())
     }
 }
