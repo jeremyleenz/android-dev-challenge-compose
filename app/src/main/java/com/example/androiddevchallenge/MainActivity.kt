@@ -167,9 +167,11 @@ fun PuppyDetail(puppy: Puppy) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ) {
-                Button(onClick = {
-                    Toast.makeText(context, R.string.adopt_toast, Toast.LENGTH_SHORT).show()
-                }) {
+                Button(
+                    onClick = {
+                        Toast.makeText(context, R.string.adopt_toast, Toast.LENGTH_SHORT).show()
+                    }
+                ) {
                     Text(stringResource(R.string.adopt_button))
                 }
                 Spacer(Modifier.size(16.dp))
