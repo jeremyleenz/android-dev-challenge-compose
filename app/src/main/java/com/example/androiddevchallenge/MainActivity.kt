@@ -19,13 +19,11 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +33,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
@@ -50,15 +52,15 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private val PUPPIES_LIST = listOf(
-            Puppy("Bella","Beagle", 7),
-            Puppy("Duke","Staffordshire Bull Terrier", 3),
-            Puppy("Snowy","German Shepherd", 12),
-            Puppy("Triggs","Staffordshire Bull Terrier", 15),
-            Puppy("Ariel","Belgian Shepherd", 12),
-            Puppy("Max","Yorkshire Terrier", 10),
-            Puppy("Eve","Saluki", 24),
-            Puppy("Pumpkin","Lurcher", 12),
-            Puppy("Milo","Bull Mastiff", 3)
+            Puppy("Bella","Beagle", 7, "Brown"),
+            Puppy("Duke","Labrador", 3, "Black"),
+            Puppy("Snowy","German Shepherd", 12, "White"),
+            Puppy("Triggs","Dalmatian", 15, "Light Brown"),
+            Puppy("Ariel","Belgian Shepherd", 12, "Black"),
+            Puppy("Max","Yorkshire Terrier", 10, "Grey"),
+            Puppy("Eve","Corgi", 24, "Dark Brown"),
+            Puppy("Pumpkin","Lurcher", 12, "White/Brown"),
+            Puppy("Milo","Bull Mastiff", 3, "Brown")
         )
     }
 }
@@ -66,11 +68,25 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp(puppies: List<Puppy>) {
+    val navController = rememberNavController()
+
     Surface(color = MaterialTheme.colors.background) {
-        LazyColumn {
-            items(puppies) { puppy ->
-                PuppyCard(puppy) {
-                    // on click
+        Scaffold {
+            NavHost(navController = navController, startDestination = "puppylist") {
+                composable("puppylist") {
+                    LazyColumn {
+                        items(puppies) { puppy ->
+                            PuppyCard(puppy) {
+                                navController.navigate("puppydetail/${puppy.id}")
+                            }
+                        }
+                    }
+                }
+                composable("puppydetail/{id}") { backStackEntry ->
+                    val puppy = puppies.find { it.id == backStackEntry.arguments?.getString("id") }
+                    if (puppy != null) {
+                        PuppyDetail(puppy)
+                    }
                 }
             }
         }
@@ -94,10 +110,29 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
-                Text("Breed: ${puppy.breed}")
-                Text("Age: ${puppy.ageInMonths} months")
+                Text(puppy.breed)
             }
         }
+    }
+}
+
+@Composable
+fun PuppyDetail(puppy: Puppy) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth()
+    ) {
+//        Image()
+        Text(
+            text = puppy.name,
+            fontWeight = FontWeight.Bold,
+            fontSize = 28.sp,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+        Text("Breed: ${puppy.breed}", fontSize = 20.sp)
+        Text("Age: ${puppy.ageInMonths} months", fontSize = 20.sp)
+        Text("Color: ${puppy.color}", fontSize = 20.sp)
     }
 }
 
