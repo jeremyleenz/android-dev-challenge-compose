@@ -13,4 +13,6 @@
     <string name="breed_label">Breed: %s</string>
     <string name="age_label">Age: %s</string>
     <string name="color_label">Color: %s</string>
+    <string name="adopt_button">Adopt me!</string>
+    <string name="adopt_toast">Woof woof!</string>
 </resources>

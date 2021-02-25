@@ -16,19 +16,23 @@
 package com.example.androiddevchallenge
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -36,6 +40,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -132,6 +137,7 @@ fun PuppyCard(puppy: Puppy, onClick: () -> Unit) {
 
 @Composable
 fun PuppyDetail(puppy: Puppy) {
+    val context = LocalContext.current
     Column {
         Image(
             painterResource(puppy.photo),
@@ -156,6 +162,18 @@ fun PuppyDetail(puppy: Puppy) {
             Text(stringResource(R.string.breed_label, puppy.breed), fontSize = 20.sp)
             Text(stringResource(R.string.age_label, puppy.ageInMonths), fontSize = 20.sp)
             Text(stringResource(R.string.color_label, puppy.color), fontSize = 20.sp)
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Button(onClick = {
+                    Toast.makeText(context, R.string.adopt_toast, Toast.LENGTH_SHORT).show()
+                }) {
+                    Text(stringResource(R.string.adopt_button))
+                }
+                Spacer(Modifier.size(16.dp))
+            }
         }
     }
 }
